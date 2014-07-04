@@ -22,8 +22,9 @@
     NSString * key = @"sxit!@#$";
 //    NSData * data = [@"success" dataUsingEncoding:NSUTF8StringEncoding];
     NSData * data = [[NSData alloc] initWithBase64EncodedString:@"wZGyoICf5fo=" options:0];
-    SLYDESCryptor * decry = [[SLYDESCryptor alloc] initToDecryptInputData:data keyData:[key dataUsingEncoding:NSUTF8StringEncoding] completionHandle:^(NSData *outputData, NSError *error) {
-//        NSLog(@"%@", [outputData base64EncodedStringWithOptions:0]);
+    SLYDESCryptor * decry = [[SLYDESCryptor alloc] initToDecryptInputData:data keyData:[key dataUsingEncoding:NSUTF8StringEncoding]];
+    [decry setCompletionHandle:^(NSData *outputData, NSError *error) {
+        //        NSLog(@"%@", [outputData base64EncodedStringWithOptions:0]);
         NSLog(@"%@", [[NSString alloc] initWithData:outputData encoding:NSUTF8StringEncoding]);
     }];
     [decry start];

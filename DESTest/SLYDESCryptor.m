@@ -38,6 +38,16 @@
     return self;
 }
 
+- (id)initToDecryptInputData:(NSData *)inputData keyData:(NSData *)keyData
+{
+    return [self initToDecryptInputData:inputData keyData:keyData completionHandle:nil];
+}
+
+- (id)initToEncryptInputData:(NSData *)inputData keyData:(NSData *)keyData
+{
+    return [self initToEncryptInputData:inputData keyData:keyData completionHandle:nil];
+}
+
 - (id)initToEncryptInputData:(NSData *)inputData keyData:(NSData *)keyData completionHandle:(void (^)(NSData *, NSError *))completionHandle
 {
     return [self initWithOp:kCCEncrypt inputData:inputData keyData:keyData completionHandle:completionHandle];

@@ -18,6 +18,10 @@
                      keyData:(NSData *)keyData
             completionHandle:(void (^)(NSData * outputData, NSError * error))completionHandle;
 
+- (id)initToEncryptInputData:(NSData *)inputData keyData:(NSData *)keyData;
+
+- (id)initToDecryptInputData:(NSData *)inputData keyData:(NSData *)keyData;
+
 @property (atomic, copy, readonly) NSData * inputData;
 
 @property (atomic, copy, readonly) NSData * keyData;
