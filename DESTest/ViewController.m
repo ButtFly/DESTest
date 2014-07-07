@@ -20,14 +20,19 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     NSString * key = @"sxit!@#$";
+    UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(100, 0, 320, 50)];
+    [self.view addSubview:label];
 //    NSData * data = [@"success" dataUsingEncoding:NSUTF8StringEncoding];
     NSData * data = [[NSData alloc] initWithBase64EncodedString:@"wZGyoICf5fo=" options:0];
     SLYDESCryptor * decry = [[SLYDESCryptor alloc] initToDecryptInputData:data keyData:[key dataUsingEncoding:NSUTF8StringEncoding]];
     [decry setCompletionHandle:^(NSData *outputData, NSError *error) {
         //        NSLog(@"%@", [outputData base64EncodedStringWithOptions:0]);
+        NSString * outputStr = [[NSString alloc] initWithData:outputData encoding:NSUTF8StringEncoding];
+        [label setText:outputStr];
         NSLog(@"%@", [[NSString alloc] initWithData:outputData encoding:NSUTF8StringEncoding]);
     }];
-    [decry start];
+    [[NSOperationQueue new] addOperation:decry];
+    NSLog(@"%@", [NSOperationQueue mainQueue] == [NSOperationQueue currentQueue] ? @"yes": @"no");
 }
 
 - (void)didReceiveMemoryWarning {

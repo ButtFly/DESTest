@@ -90,7 +90,9 @@
         self.error = [NSError errorWithDomain:kSLYDESCryptorErrorDomain code:err userInfo:nil];
     }
     if (_completionHandle) {
-        _completionHandle(self.outputData, self.error);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            _completionHandle(self.outputData, self.error);
+        });
     }
 }
 
